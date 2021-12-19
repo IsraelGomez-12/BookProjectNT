@@ -1,0 +1,42 @@
+﻿@page "/EditBook/{id}"
+
+@inject HttpClient client;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+<h3>Edit Book</h3>
+
+<FormBookEdit book="book" PutBook="UpdateBook"  />
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    public Book book = new Book();
+
+    public async Task UpdateBook(Book bookToUpdate)
+    {
+
+        var response = await client.PutAsJsonAsync($"https://localhost:5002/api/BooksControllers/", bookToUpdate);
+
+        if (response.IsSuccessStatusCode)
+        {
+            bookToUpdate = await response.Content.ReadFromJsonAsync<Book>();
+        }
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var response = await client.PostAsJsonAsync($"https://localhost:5002/api/BooksControllers/{id}", id);
+
+        if (response.IsSuccessStatusCode)
+        {
+            book = await response.Content.ReadFromJsonAsync<Book>();
+        }
+
+
+    }
+}

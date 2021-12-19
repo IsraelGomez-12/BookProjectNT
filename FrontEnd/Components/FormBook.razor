@@ -1,0 +1,42 @@
+﻿<form @onsubmit="CreateBook">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input @bind="book.title" type="text" class="form-control" required>
+    </div>
+    <div class="form-floating">
+        <label for="floatingTextarea2">Description</label>
+        <textarea @bind="book.description" class="form-control" style="height: 100px" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Page Count</label>
+        <input @bind="book.pageCount" type="number" class="form-control" required>
+    </div>
+    <div class="form-floating">
+        <label for="floatingTextarea2">Excerpt</label>
+        <textarea @bind="book.excerpt" class="form-control" style="height: 100px" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Publish Date</label>
+        <input type="datetime" @bind-value="book.publishDate" class="form-control" required>
+    </div>
+    <button style="background-color:#3761eb;color:#fff;" type="submit" class="btn">Submit</button>
+</form>
+@code {
+
+    public Book book = new Book();
+
+    [Parameter]
+    public EventCallback<Book> PostBook { get; set; }
+
+    private async Task CreateBook()
+    {
+        await PostBook.InvokeAsync(book);
+        book.title = "";
+        book.description = "";
+        book.pageCount = 0;
+        book.excerpt = "";
+    }
+
+
+
+}

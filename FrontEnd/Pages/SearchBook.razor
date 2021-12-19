@@ -1,0 +1,59 @@
+﻿@page "/GetBook"
+
+@inject HttpClient client;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+
+<h3 class="title">Search for a Book</h3>
+
+
+
+<div class="input-row">
+    <input @bind="id" placeholder="Search..." type="number" class="input" aria-label="book searchbar">
+    <div class="icon-box">
+        <i class="fas fa-search fa-lg"></i>
+    </div>
+    <button @onclick="@(e => GetBook(id))">
+        Search
+    </button>
+</div>
+
+<p>
+    Search for a book specifying the id in the search bar.
+    Click ok and wait for the results to appear.
+</p>
+@if (showCard)
+{
+    <CardBook book="book" />
+}
+
+@if (isLoading)
+{
+    <Spinner />
+}
+
+@code {
+
+
+    bool isLoading;
+    bool showCard = false;
+    private int id;
+    private Book book = new Book();
+
+    public async Task GetBook(int id)
+    {
+        isLoading = true;
+
+        var response = await client.PostAsJsonAsync($"https://localhost:5002/api/BooksControllers/{id}", id);
+
+        if (response.IsSuccessStatusCode)
+        {
+            book = await response.Content.ReadFromJsonAsync<Book>();
+        }
+
+        isLoading = false;
+        showCard = true;
+
+    }
+}

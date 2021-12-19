@@ -1,0 +1,51 @@
+﻿@page "/"
+
+@inject HttpClient client;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+
+<h3 class="title">Book List</h3>
+
+@if (isLoading)
+{
+    <Spinner />
+
+}
+@if (showTable)
+{
+    <TableBook bookList="@books" />
+}
+
+
+
+@code {
+
+    bool isLoading = true;
+    bool showTable = false;
+    private IEnumerable<Book> books = Array.Empty<Book>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get,
+        "https://localhost:5002/api/BooksControllers");
+
+
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            books = await JsonSerializer.DeserializeAsync
+            <IEnumerable<Book>>(responseStream);
+        }
+
+        isLoading = false;
+        showTable = true;
+
+
+    }
+
+
+
+}

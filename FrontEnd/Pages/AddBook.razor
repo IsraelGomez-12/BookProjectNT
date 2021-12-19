@@ -1,0 +1,46 @@
+﻿@page "/AddBook"
+
+
+@inject HttpClient client;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+<h3 class="title">Add a Book</h3>
+
+<FormBook PostBook="@CreateBook" />
+
+@if (isSuccess)
+{
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Success</strong>
+        <small>20 secs ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Your book was successfully saved
+    </div>
+</div>
+}
+
+
+@code {
+    bool isSuccess;
+    public async Task CreateBook(Book book)
+    {
+
+        var response = await client.PostAsJsonAsync($"https://localhost:5002/api/BooksControllers/", book);
+
+        if (response.IsSuccessStatusCode)
+        {
+            book = await response.Content.ReadFromJsonAsync<Book>();
+            isSuccess = true;
+
+        }
+
+    }
+
+
+
+}

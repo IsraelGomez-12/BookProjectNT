@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/alvaro/Documents/net/BookNT/ApiBooks/ApiBooks.csproj": {}
+  },
+  "projects": {
+    "/home/alvaro/Documents/net/BookNT/ApiBooks/ApiBooks.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/alvaro/Documents/net/BookNT/ApiBooks/ApiBooks.csproj",
+        "projectName": "ApiBooks",
+        "projectPath": "/home/alvaro/Documents/net/BookNT/ApiBooks/ApiBooks.csproj",
+        "packagesPath": "/home/alvaro/.nuget/packages/",
+        "outputPath": "/home/alvaro/Documents/net/BookNT/ApiBooks/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/alvaro/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "DefaultDocumentation": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[0.7.9, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.16.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background-color: #111;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  padding: 2rem;
+}
+
+.sidebar .logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  background-color: var(--secondary-blue);
+  color: var(--primary-blue);
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.sidebar h3 {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--title-color);
+  margin-bottom: 1.5rem;
+}
+
+.sidebar h6 {
+  margin-top: 2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
+}
+
+.nav-option {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  border-radius: 16px;
+}
+
+.nav-option .option {
+  text-decoration: none;
+}
+
+.nav-option:hover {
+  background-color: var(--secondary-blue);
+  color: var(--white);
+  border-radius: 16px;
+}
+
+.nav-option > .option > span {
+  color: var(--font-color);
+  padding-left: 10px;
+  transition: all 0.2s ease-in;
+  color: 500;
+  user-select: none;
+}
+
+.nav-option > .option > i {
+  color: var(--font-color);
+  transition: all 0.2s ease-in;
+  user-select: none;
+}
+
+.nav-option:hover > .option > i {
+  color: var(--hover-text-color);
+}
+
+.nav-option:hover .option > span {
+  color: var(--hover-text-color);
+}
+
+.nav-option:nth-child(1) {
+  margin-top: 0px;
+}

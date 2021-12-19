@@ -1,0 +1,35 @@
+﻿@page "/Details/{id}"
+<h3>BookDetails</h3>
+
+@inject HttpClient client;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+<CardBook book="@book"/>
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    Book book = new Book();
+
+    bool isLoading;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var response = await client.PostAsJsonAsync($"https://localhost:5002/api/BooksControllers/{id}",id);
+
+        if (response.IsSuccessStatusCode)
+        {
+            book = await response.Content.ReadFromJsonAsync<Book>();
+        }
+
+        isLoading = true;
+
+
+    }
+
+}

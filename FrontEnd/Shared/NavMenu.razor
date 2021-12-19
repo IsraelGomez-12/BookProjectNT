@@ -1,0 +1,45 @@
+﻿<nav class="sidebar">
+    <h3>
+        Newtech Books
+    </h3>
+
+    <div class="logo">
+        NT
+    </div>
+
+
+    <h6>Navigation</h6>
+
+    <div class="nav-option">
+        <NavLink class="option" href="" Match="NavLinkMatch.All">
+            <i class="fas fa-home fa-lg"></i>
+            <span>Home</span>
+        </NavLink>
+    </div>
+
+    <div class="nav-option mt-3">
+        <NavLink class="option" href="AddBook">
+            <i class="fas fa-book fa-lg"></i>
+            <span>Add Book</span>
+        </NavLink>
+    </div>
+
+    <div class="nav-option mt-3">
+        <NavLink class="option" href="GetBook">
+            <i class="fas fa-search fa-lg"></i>
+            <span>Search for Book</span>
+        </NavLink>
+    </div>
+
+</nav>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

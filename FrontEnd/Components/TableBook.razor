@@ -1,0 +1,80 @@
+﻿@inject NavigationManager navigationManager
+@inject HttpClient client;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+@inject IJSRuntime JsRuntime
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Count Page</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in bookList)
+        {
+            <tr>
+                <td scope="row">@book.id</td>
+                <td>@book.title</td>
+                <td>@book.pageCount</td>
+                <td>
+                    <div class="btn-row" role="group" aria-label="Basic example">
+                        <button @onclick="@(e => GotoDetails(book.id))" type="button">Details</button>
+                        <button @onclick="@(e => GotoEdit(book.id))" type="button">Edit</button>
+                        <button @onclick="@(e => DeleteBook(book.id))" type="button">Delete</button>
+                    </div>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+@code {
+
+    bool modalHidden;
+
+    [Parameter]
+    public IEnumerable<Book> bookList { get; set; }
+
+    public void GotoDetails(int id)
+    {
+        navigationManager.NavigateTo($"/Details/{id}");
+    }
+
+    public void GotoEdit(int id)
+    {
+        navigationManager.NavigateTo($"/EditBook/{id}");
+    }
+
+    public void ModalApper()
+    {
+        modalHidden = true;
+    }
+
+    public async Task DeleteBook(int id)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this Book?");
+        if (confirmed)
+        {
+
+            HttpResponseMessage response = await client.DeleteAsync("https://localhost:5002/api/BooksControllers/" + id);
+
+            if (response.IsSuccessStatusCode)
+            {
+
+            }
+
+        }
+
+    }
+
+
+}
